@@ -1,0 +1,4 @@
+R1: B y C -> A
+R2: C y D -> A
+R3: E -> B
+R4: F -> C
