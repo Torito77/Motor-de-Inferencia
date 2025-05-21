@@ -1,4 +1,9 @@
-R1: B y C -> A
-R2: C y D -> A
-R3: E -> B
-R4: F -> C
+R1: A y B -> C
+R2: A -> D
+R3: C y D -> E
+R4: B y E y F -> G
+R5: A y E -> H 
+R6: D y E y H -> I
+
+bh = {A,B,F}
+m = H
