@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Set
 
 
 class Regla:
@@ -13,14 +13,22 @@ class Regla:
     def __str__(self):
         ant = " y ".join(self.antecedentes)
         return f"{self.nombre}: {ant} -> {self.consecuente}"
+    
+    def __repr__(self):
+        return self.nombre
 
-def reglas_disparables(reglas, hechos, reglas_usadas):
-    disparables = []
+def reglas_disparables(reglas: List[Regla], hechos:Set[str], reglas_usadas:List[Regla]) -> List[Regla]:
+    disparables: List[Regla] = []
     for regla in reglas:
         if ( regla.es_disparable(hechos) ) and ( regla not in reglas_usadas ):
             disparables.append(regla)
         
     return disparables
+
+def equiparacion(reglas: List[Regla], meta: str) -> List[Regla]:
+    return [regla for regla in reglas if regla.consecuente == meta]
+
+
 
 def cargar_reglas_desde_archivo(ruta):
     """
