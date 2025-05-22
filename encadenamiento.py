@@ -31,7 +31,9 @@ def encadenamiento_delante(reglas: List[Regla], hechos_iniciales, meta: str):
         table.add_row([str(cc),nh,"",r.nombre,str(bh)])
     
     print(table)
-    return (meta in bh), reglas_disparadas
+    
+    # return reglas disparadas
+    return meta in bh
 
 
 def encadenamiento_detras(reglas: List[Regla], hechos_iniciales, meta: str) -> bool:
@@ -56,25 +58,28 @@ def encadenamiento_detras(reglas: List[Regla], hechos_iniciales, meta: str) -> b
             r = cc.pop(0)
             nm = r.antecedentes - bh
             verificado = True
+            
+            # Table printing code - - - - >
+            table.add_row([str(cc if cc else ""),str(nm if nm else ""),meta,f"{r.nombre}",str(bh)])
+            # - - - - - - - - - - - - - - >
+            
             while nm and verificado:
-                
-                # Table printing code - - - - >
-                table.add_row([str(cc if cc else ""),str(nm if nm else ""),meta,r.nombre,str(bh)])
-                # - - - - - - - - - - - - - - >
                 
                 meta = nm.pop()
                 verificado = verificar(meta, bh)
                 
                 if verificado:
                     bh.add(meta)
-
-            # Table printing code - - - - >
-            # NOTE: You might wanna get rid of this, enphasis on MIGHT
-            table.add_row([str(cc if cc else ""),str(nm if nm else ""),meta,r.nombre,str(bh)])
-            # - - - - - - - - - - - - - - >
-            
+                    
         return verificado
 
     resultado = verificar(meta, bh)
+    # Table printing code - - - - >
+    # NOTE: Adds a bh row right
+    if resultado:
+        table.add_row(["","","","",str(bh)])
+        table.add_row(["","","","",str(bh.union({meta}))])
+    # - - - - - - - - - - - - - - >
+    
     print(table)
-    return resultado#
+    return resultado
