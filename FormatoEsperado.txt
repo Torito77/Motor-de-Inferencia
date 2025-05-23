@@ -5,5 +5,5 @@ R4: B y E y F -> G
 R5: A y E -> H 
 R6: D y E y H -> I
 
-# bh = {A,B,F}
-# m = H
+bh = {A,B,F}
+m = H

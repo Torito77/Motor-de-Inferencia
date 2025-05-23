@@ -27,9 +27,9 @@ while True:
     match input("\nSeleccione una opción: \n"
                 "1) Encadenamiento hacia adelante\n"
                 "2) Encadenamiento hacia atrás\n"
-                "3) Cambiar ruta del archivo\n"
-                "4) Cambiar hechos iniciales\n"
-                "5) Cambiar meta\n"
+                "3) Definir ruta del archivo\n"
+                "4) Definir hechos iniciales\n"
+                "5) Definir meta\n"
                 "q) Salir\n").lower():
         
         case "1":
