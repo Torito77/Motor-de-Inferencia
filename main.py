@@ -2,39 +2,58 @@ import regla
 from encadenamiento import encadenamiento_delante, encadenamiento_detras
 
 
-ruta = "./FormatoEsperado.txt"
+def helper(encadenamiento):
+    if not reglas:
+        print("No se encontraron reglas")
+        return
+    if not hechos_iniciales:
+        print("No se encontraron hechos iniciales")
+        return
+    if not meta:
+        print("No se encontro una meta")
+        return
+    
+    exito = encadenamiento(reglas, hechos_iniciales, meta)
+    print("Éxito :)" if exito else "Fracaso :(")
 
-#TODO: Pedir reglas y meta al usuario
+
+# - - - - - - - - - - Main program - - - - - - - - - - >
+
+ruta = "./FormatoEsperado.txt"
+reglas, hechos_iniciales, meta = regla.cargar_reglas_desde_archivo(ruta)
 
 while True:
     
-    reglas, hechos_iniciales, meta = regla.cargar_reglas_desde_archivo(ruta)
-    
     match input("\nSeleccione una opción: \n"
-                "a) Encadenamiento hacia adelante\n"
-                "b) Encadenamiento hacia atrás\n"
-                "c) Cambiar ruta del archivo\n"
+                "1) Encadenamiento hacia adelante\n"
+                "2) Encadenamiento hacia atrás\n"
+                "3) Cambiar ruta del archivo\n"
+                "4) Cambiar hechos iniciales\n"
+                "5) Cambiar meta\n"
                 "q) Salir\n").lower():
-        case "a":
-            exito = encadenamiento_delante(reglas,hechos_iniciales,meta)
-            print("Éxito :)" if exito else "Fracaso :(")
+        
+        case "1":
+            helper(encadenamiento_delante)
             
-        case "b":
-            exito = encadenamiento_detras(reglas,hechos_iniciales,meta)
-            print("Éxito :)" if exito else "Fracaso :(")
+        case "2":
+            helper(encadenamiento_detras)
             
-        case "c":
-            while True:
-                ruta = input("Ingrese la nueva ruta: ")
-                try:
-                    reglas, hechos_iniciales, meta = regla.cargar_reglas_desde_archivo(ruta)
-                except FileNotFoundError as error:
-                    print("File not found")
-                else:
-                    break
-                
-            print("Ruta guardada!")
+        case "3":
+            ruta = input("Ingrese la nueva ruta: ")
+            try:
+                reglas = regla.cargar_reglas_desde_archivo(ruta)
+            except FileNotFoundError as error:
+                print("Archivo no encontrado")
+            else:
+                print("Ruta guardada!")
+        
+        case "4":
+            contenido = input("Ingrese los hechos iniciales separados por ',': ").strip().strip("{}")
+            hechos_iniciales = { h.strip().upper() for h in contenido.split(",") if h.strip() }
+            
+        case "5":
+            meta = input("Ingrese la meta: ").strip().upper()
+            
         case "q":
             break
-    
-    
+

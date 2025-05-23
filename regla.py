@@ -29,8 +29,6 @@ def equiparacion(reglas: List[Regla], meta: str) -> List[Regla]:
     return [regla for regla in reglas if regla.consecuente == meta]
 
 
-# TODO: Make it so it only returns rules
-
 def cargar_reglas_desde_archivo(ruta):
     """
     Carga las reglas, los hechos iniciales y la meta desde un archivo.
