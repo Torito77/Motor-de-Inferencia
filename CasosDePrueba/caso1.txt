@@ -1,0 +1,6 @@
+R1: A -> B
+R2: B y C -> D
+R3: D -> E
+
+bh = {A, C}
+m = E

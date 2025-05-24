@@ -41,7 +41,7 @@ while True:
         case "3":
             ruta = input("Ingrese la nueva ruta: ")
             try:
-                reglas = regla.cargar_reglas_desde_archivo(ruta)
+                reglas, hechos_iniciales, meta = regla.cargar_reglas_desde_archivo(ruta)
             except FileNotFoundError as error:
                 print("Archivo no encontrado")
             else:

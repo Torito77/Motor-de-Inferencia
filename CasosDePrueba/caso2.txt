@@ -1,0 +1,6 @@
+R1: A y B -> C
+R2: C y D -> E
+R3: E -> F
+
+bh = {A}
+m = F
